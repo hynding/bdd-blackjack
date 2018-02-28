@@ -30,6 +30,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
     const cardFaceOrder = order.raw()
+    console.log('cfo', cardFaceOrder)
     cardSet.forEach((card, index) => {
       const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Hearts')
