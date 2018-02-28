@@ -19,6 +19,16 @@ class Deck {
     }
   }
 
+  shuffle() {
+    for (let index = this.stack.length - 1; index > 0; index--) {
+      const current = this.stack[index]
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      this.stack[index] = this.stack[randomIndex];
+      this.stack[randomIndex] = current;
+    }
+    return this
+  }
+
   get remaining () {
     return this.stack.length
   }

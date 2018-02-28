@@ -40,14 +40,18 @@ Then('the {word} set of {int} cards in my hand should be {string} in face order'
     equal(Deck.suits[card.suit], suit)
     equal(Deck.faces[card.face], cardFaceName)
   })
+})
 
-  Then('I should not expect the cards to be in the same order as a new deck', function () {
-    const newDeck = new Deck()
-    for (let i = 0; i < newDeck.remaining; i++) {
-      if (newDeck.stack[i].face !== deck.stack[i].face && newDeck.stack[i].suit !== deck.stack[i].suit) {
-        break
-      }
+Then('I should not expect the cards to be in the same order as a new deck', function () {
+  let counter = 0
+  const newDeck = new Deck()
+  while (counter++ < newDeck.remaining) {
+    if (newDeck.stack[counter].face !== deck.stack[counter].face && newDeck.stack[counter].suit !== deck.stack[counter].suit) {
+      break
     }
-    ok(i < newDeck.remaining)
-  })
+    else {
+      console.log(counter)
+    }
+  }
+  ok(counter < newDeck.remaining)
 })
