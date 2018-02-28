@@ -1,6 +1,6 @@
 const { defineSupportCode } = require('cucumber')
 const { Deck } = require('../../index')
-const { equal } = require('assert')
+const { equal, ok } = require('assert')
 
 defineSupportCode(function ({ Given, When, Then }) {
 
@@ -23,5 +23,49 @@ defineSupportCode(function ({ Given, When, Then }) {
 
   Then('I should have no more cards in the deck', function () {
     equal(deck.remaining, 0)
+  })
+
+  Then('the first set of 13 cards should be Hearts ordered from Ace to King', function () {
+    const cardSet = hand.slice(0, 13)
+    const firstCard = cardSet[0]
+    const lastCard = cardSet[cardSet.length - 1]
+    cardSet.forEach(card => {
+      equal(Deck.suits[card.suit], 'Hearts')
+    })
+    equal(Deck.faces[firstCard.face], 'Ace')
+    equal(Deck.faces[lastCard.face], 'King')
+  })
+
+  Then('the second set of 13 cards should be Clubs ordered from Ace to King', function () {
+    const cardSet = hand.slice(1, 13)
+    const firstCard = cardSet[0]
+    const lastCard = cardSet[cardSet.length - 1]
+    cardSet.forEach(card => {
+      equal(Deck.suits[card.suit], 'Clubs')
+    })
+    equal(Deck.faces[firstCard.face], 'Ace')
+    equal(Deck.faces[lastCard.face], 'King')
+  })
+
+  Then('the third set of 13 cards should be Diamonds ordered from Ace to King', function () {
+    const cardSet = hand.slice(2, 13)
+    const firstCard = cardSet[0]
+    const lastCard = cardSet[cardSet.length - 1]
+    cardSet.forEach(card => {
+      equal(Deck.suits[card.suit], 'Diamonds')
+    })
+    equal(Deck.faces[firstCard.face], 'Ace')
+    equal(Deck.faces[lastCard.face], 'King')
+  })
+
+  Then('the fourth set of 13 cards should be Spades ordered from Ace to King', function () {
+    const cardSet = hand.slice(3, 13)
+    const firstCard = cardSet[0]
+    const lastCard = cardSet[cardSet.length - 1]
+    cardSet.forEach(card => {
+      equal(Deck.suits[card.suit], 'Spades')
+    })
+    equal(Deck.faces[firstCard.face], 'Ace')
+    equal(Deck.faces[lastCard.face], 'King')
   })
 })
