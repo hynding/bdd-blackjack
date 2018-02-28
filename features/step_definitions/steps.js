@@ -30,7 +30,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
     const cardFaceOrder = order.raw()
-    cardSet.forEach(card => {
+    cardSet.forEach((card, index) => {
       const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Hearts')
       equal(Deck.face[card.face], cardFaceName)
@@ -42,7 +42,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
     const cardFaceOrder = order.raw()
-    cardSet.forEach(card => {
+    cardSet.forEach((card, index) => {
       const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Clubs')
       equal(Deck.face[card.face], cardFaceName)
@@ -54,7 +54,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
     const cardFaceOrder = order.raw()
-    cardSet.forEach(card => {
+    cardSet.forEach((card, index) => {
       const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Diamonds')
       equal(Deck.face[card.face], cardFaceName)
