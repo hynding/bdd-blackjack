@@ -25,37 +25,40 @@ defineSupportCode(function ({ Given, When, Then }) {
     equal(deck.remaining, 0)
   })
 
-  Then('the first set of 13 cards should be Hearts ordered from Ace to King', function () {
+  Then('the first set of 13 cards should be Hearts in the following order', function (order) {
     const cardSet = hand.slice(0, 13)
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
+    const cardFaceOrder = order.raw()
     cardSet.forEach(card => {
+      const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Hearts')
+      equal(Deck.face[card.face], cardFaceName)
     })
-    equal(Deck.faces[firstCard.face], 'Ace')
-    equal(Deck.faces[lastCard.face], 'King')
   })
 
-  Then('the second set of 13 cards should be Clubs ordered from Ace to King', function () {
+  Then('the second set of 13 cards should be Clubs in the following order', function (order) {
     const cardSet = hand.slice(1, 13)
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
+    const cardFaceOrder = order.raw()
     cardSet.forEach(card => {
+      const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Clubs')
+      equal(Deck.face[card.face], cardFaceName)
     })
-    equal(Deck.faces[firstCard.face], 'Ace')
-    equal(Deck.faces[lastCard.face], 'King')
   })
 
-  Then('the third set of 13 cards should be Diamonds ordered from Ace to King', function () {
+  Then('the third set of 13 cards should be Diamonds in the following order', function (order) {
     const cardSet = hand.slice(2, 13)
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
+    const cardFaceOrder = order.raw()
     cardSet.forEach(card => {
+      const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Diamonds')
+      equal(Deck.face[card.face], cardFaceName)
     })
-    equal(Deck.faces[firstCard.face], 'Ace')
-    equal(Deck.faces[lastCard.face], 'King')
   })
 
   Then('the fourth set of 13 cards should be Spades in the following order', function (order) {
