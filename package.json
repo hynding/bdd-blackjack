@@ -1,0 +1,23 @@
+{
+  "name": "bdd-blackjack",
+  "version": "1.0.0",
+  "description": "A demo and exploration of Gherkin and Cucumber JS with the classic casino-style table game",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hynding/bdd-blackjack.git"
+  },
+  "author": "Steve Hynding",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hynding/bdd-blackjack/issues"
+  },
+  "homepage": "https://github.com/hynding/bdd-blackjack#readme",
+  "devDependencies": {
+    "cucumber": "^4.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
