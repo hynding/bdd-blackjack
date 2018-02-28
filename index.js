@@ -64,4 +64,29 @@ class Deck {
     ]
   }
 }
+
+class Game {
+  constructor (deck) {
+    this.start(deck)
+  }
+
+  start (deck) {
+    this.player = {
+      hand: []
+    }
+    this.dealer = {
+      hand: []
+    }
+    this.turn = 'player'
+    this.deck = deck
+  }
+
+  deal () {
+    const dealtCard = this.deck.deal()
+    this[this.turn].hand.push(dealtCard)
+    this.turn = this.turn === 'player' ? 'dealer' : 'player'
+    return dealtCard
+  }
+}
 exports.Deck = Deck
+exports.Game = Game

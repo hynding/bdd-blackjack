@@ -1,5 +1,5 @@
 const { Given, When, Then } = require('cucumber')
-const { Deck } = require('../../index')
+const { Deck, Game } = require('../../index')
 const { equal, ok } = require('assert')
 
 let deck, hand, faceOrder, game, dealtCard
@@ -12,7 +12,7 @@ Given('the face order of each suit is', function(data) {
   faceOrder = data.raw().map(faceName => faceName[0])
 })
 
-Given('I start a new game', function(data) {
+Given('I start a new game', function () {
   deck = new Deck()
   deck.shuffle()
   game = new Game(deck)
@@ -55,21 +55,23 @@ Then('the {word} set of {int} cards in my hand should be {string} in face order'
 Then('I should not expect the cards to be in the same order as a new deck', function () {
   let counter = 0
   const newDeck = new Deck()
-  while (counter++ < newDeck.remaining) {
+  while (counter < newDeck.remaining) {
     if (newDeck.stack[counter].face !== deck.stack[counter].face && newDeck.stack[counter].suit !== deck.stack[counter].suit) {
       break
     }
-    else {
-      console.log(counter)
-    }
+    counter++
   }
   ok(counter < newDeck.remaining)
 })
 
-Then('the card should appear in the players hand', function() {
-  ok(game.player.hand.indexOf(dealtCard))
+Then('the card should appear in the players hand', function () {
+  ok(~game.player.hand.indexOf(dealtCard))
 })
 
-Then('the card should appear in the dealers hand', function() {
-  ok(game.dealer.hand.indexOf(dealtCard))
+Then('the card should appear in the dealers hand', function () {
+  ok(~game.dealer.hand.indexOf(dealtCard))
+})
+
+Then('the {word} should have {int} cards', function (holder, count) {
+  equal(game[holder].hand.length, count)
 })
