@@ -1,6 +1,6 @@
 const { defineSupportCode } = require('cucumber')
 const { Deck } = require('../../index')
-const { equals } = require('assert')
+const { equal } = require('assert')
 
 defineSupportCode(function ({ Given, When, Then }) {
 
@@ -18,10 +18,10 @@ defineSupportCode(function ({ Given, When, Then }) {
   })
 
   Then('I should have a hand of 52 cards', function () {
-    equals(hand.length, 52)
+    equal(hand.length, 52)
   })
 
   Then('I should have no more cards in the deck', function () {
-    equals(deck.remaining, 0)
+    equal(deck.remaining, 0)
   })
 })
