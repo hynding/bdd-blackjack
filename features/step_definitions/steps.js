@@ -19,6 +19,10 @@ When('I deal all cards', function () {
   }
 })
 
+When('I shuffle the deck', function () {
+  deck.shuffle()
+})
+
 Then('I should have a hand of 52 cards', function () {
   equal(hand.length, 52)
 })
@@ -35,5 +39,15 @@ Then('the {word} set of {int} cards in my hand should be {string} in face order'
     const cardFaceName = faceOrder[index]
     equal(Deck.suits[card.suit], suit)
     equal(Deck.faces[card.face], cardFaceName)
+  })
+
+  Then('I should not expect the cards to be in the same order as a new deck', function () {
+    const newDeck = new Deck()
+    for (let i = 0; i < newDeck.remaining; i++) {
+      if (newDeck.stack[i].face !== deck.stack[i].face && newDeck.stack[i].suit !== deck.stack[i].suit) {
+        break
+      }
+    }
+    ok(i < newDeck.remaining)
   })
 })
