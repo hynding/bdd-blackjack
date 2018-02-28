@@ -58,14 +58,15 @@ defineSupportCode(function ({ Given, When, Then }) {
     equal(Deck.faces[lastCard.face], 'King')
   })
 
-  Then('the fourth set of 13 cards should be Spades ordered from Ace to King', function () {
+  Then('the fourth set of 13 cards should be Spades in the following order', function (order) {
     const cardSet = hand.slice(3, 13)
     const firstCard = cardSet[0]
     const lastCard = cardSet[cardSet.length - 1]
-    cardSet.forEach(card => {
+    const cardFaceOrder = order.raw()
+    cardSet.forEach((card, index) => {
+      const cardFaceName = cardFaceOrder[index][0]
       equal(Deck.suits[card.suit], 'Spades')
+      equal(Deck.face[card.face], cardFaceName)
     })
-    equal(Deck.faces[firstCard.face], 'Ace')
-    equal(Deck.faces[lastCard.face], 'King')
   })
 })
