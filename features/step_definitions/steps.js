@@ -2,7 +2,7 @@ const { Given, When, Then } = require('cucumber')
 const { Deck } = require('../../index')
 const { equal, ok } = require('assert')
 
-let deck, hand, faceOrder
+let deck, hand, faceOrder, game, dealtCard
 
 Given('I have a new deck of cards', function () {
   deck = new Deck()
@@ -10,6 +10,12 @@ Given('I have a new deck of cards', function () {
 
 Given('the face order of each suit is', function(data) {
   faceOrder = data.raw().map(faceName => faceName[0])
+})
+
+Given('I start a new game', function(data) {
+  deck = new Deck()
+  deck.shuffle()
+  game = new Game(deck)
 })
 
 When('I deal all cards', function () {
@@ -21,6 +27,10 @@ When('I deal all cards', function () {
 
 When('I shuffle the deck', function () {
   deck.shuffle()
+})
+
+When('the dealer deals a card', function() {
+  dealtCard = game.deal()
 })
 
 Then('I should have a hand of 52 cards', function () {
@@ -54,4 +64,12 @@ Then('I should not expect the cards to be in the same order as a new deck', func
     }
   }
   ok(counter < newDeck.remaining)
+})
+
+Then('the card should appear in the players hand', function() {
+  ok(game.player.hand.indexOf(dealtCard))
+})
+
+Then('the card should appear in the dealers hand', function() {
+  ok(game.dealer.hand.indexOf(dealtCard))
 })
