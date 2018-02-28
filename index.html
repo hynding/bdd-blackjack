@@ -1,11 +1,81 @@
 <html>
   <head>
     <title>BDD Blackjack</title>
+    <style>
+      card {
+        position: relative;
+        display: inline-block;
+        margin: 5px;
+        width: 100px;
+        height: 150px;
+        border: 1px solid black;
+        border-radius: 4px;
+      }
+      card face {
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+      }
+      card suit {
+        position: relative;
+        display: block;
+        margin: 50%;
+        font-size: 40px;
+      }
+    </style>
+    <script>
+      exports = {}
+    </script>
+    <script src="index.js"></script>
   </head>
   <body>
+    <header>
+      <h1>BDD Blackjack</h1>
+    </header>
     <main id="Table">
-      <section id="Dealer"></section>
-      <section id="Players"></section>
+      <h2>Dealer Hand</h2>
+      <section id="dealer"></section>
+      <h2>Player Hand</h2>
+      <section id="player"></section>
     </main>
+    <script>
+      function createCardElement(card) {
+        const cardEl = document.createElement('card')
+        const faceEl = document.createElement('face')
+        const suitEl = document.createElement('suit')
+        faceEl.innerHTML = getFaceChar(card.face)
+        suitEl.innerHTML = getSuitChar(card.suit)
+        cardEl.appendChild(faceEl)
+        cardEl.appendChild(suitEl)
+        return cardEl;
+      }
+      function getSuitChar(suit) {
+        const suitName = Deck.suits[suit]
+        if (suitName === 'Diamonds') {
+          return '&diams;'
+        }
+        return `&${suitName.toLowerCase()};`
+      }
+      function getFaceChar(face) {
+        if (face && face < 10) {
+          return face + 1
+        }
+        return Deck.faces[face].charAt(0)
+      }
+      const deck = new Deck()
+      deck.shuffle()
+      const game = new Game(deck)
+      game.deal()
+      game.deal()
+      game.deal()
+      game.deal()
+      const dealerSection = document.getElementById('dealer')
+      const playerSection = document.getElementById('player')
+      dealerSection.appendChild(createCardElement(game.dealer.hand[0]))
+      dealerSection.appendChild(createCardElement(game.dealer.hand[1]))
+      playerSection.appendChild(createCardElement(game.player.hand[0]))
+      playerSection.appendChild(createCardElement(game.player.hand[1]))
+    </script>
   </body>
 </html>

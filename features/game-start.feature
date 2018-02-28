@@ -12,4 +12,3 @@ Feature: Starting a new game
     Then the card should appear in the dealers hand
     And the player should have 2 cards
     And the dealer should have 2 cards
-

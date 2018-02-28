@@ -1,8 +1,11 @@
-const { Given, When, Then } = require('cucumber')
+const { Given, When, Then, setDefaultTimeout } = require('cucumber')
+const { Builder } = require('selenium-webdriver')
 const { Deck, Game } = require('../../index')
 const { equal, ok } = require('assert')
 
 let deck, hand, faceOrder, game, dealtCard
+
+setDefaultTimeout(60 * 1000)
 
 Given('I have a new deck of cards', function () {
   deck = new Deck()
@@ -31,6 +34,12 @@ When('I shuffle the deck', function () {
 
 When('the dealer deals a card', function() {
   dealtCard = game.deal()
+})
+
+When('I navigate to {string}', function (url) {
+  this.driver = new Builder().forBrowser('chrome').build()
+  console.log('this.driver', this.driver)
+  return this.driver.get(url)
 })
 
 Then('I should have a hand of 52 cards', function () {
@@ -74,4 +83,8 @@ Then('the card should appear in the dealers hand', function () {
 
 Then('the {word} should have {int} cards', function (holder, count) {
   equal(game[holder].hand.length, count)
+})
+
+Then('I should see {int} {word} cards', function (count, holder) {
+  return this.driver.sleep(10000)
 })
